@@ -1,13 +1,25 @@
 @startuml
 left to right direction
-skinparam packageStyle rectangle
-actor Пользователь as User
+actor User
+actor Admin
 
-rectangle "Электронная доска объявлений" {
-  usecase "Размещение объявления" as PlaceAd
-  usecase "Удаление объявления" as DeleteAd
-  User --> PlaceAd
-  User --> DeleteAd
+rectangle "Электронная Доска Объявлений" {
+  usecase "Просмотреть объявления" as UC1
+  usecase "Разместить объявление" as UC2
+  usecase "Редактировать объявление" as UC3
+  usecase "Удалить объявление" as UC4
+  usecase "Управление пользователями" as UC5
+  usecase "Управление категориями" as UC6
+  usecase "Управление объявлениями" as UC7
 }
+
+User --> UC1
+User --> UC2
+User --> UC3
+User --> UC4
+Admin --> UC5
+Admin --> UC6
+Admin --> UC7
+
 @enduml
 
