@@ -1,12 +1,93 @@
 @startuml
-package ElectronicBulletinBoard {
-  class User
-  class Advertisement {
-    + title : String
-    + description : String
-    + price : Double
-    + seller : User
+skinparam classAttributeIconSize 0
+
+package "com.board.model" {
+  class User {
+    - id: Long
+    - username: String
+    - password: String
+    - email: String
+    - role: Role
   }
-  User "1" -- "0..*" Advertisement
+
+  class Role {
+    - id: Long
+    - name: String
+  }
+
+  enum RoleType {
+    USER,
+    ADMIN
+  }
+
+  class Category {
+    - id: Long
+    - name: String
+    - description: String
+  }
+
+  class Announcement {
+    - id: Long
+    - title: String
+    - description: String
+    - price: Double
+    - location: String
+    - dateCreated: Date
+    - user: User
+    - category: Category
+  }
 }
+
+package "com.board.service" {
+  class UserService {
+    - userRepository: UserRepository
+  }
+
+  class RoleService {
+    - roleRepository: RoleRepository
+  }
+
+  class CategoryService {
+    - categoryRepository: CategoryRepository
+  }
+
+  class AnnouncementService {
+    - announcementRepository: AnnouncementRepository
+  }
+}
+
+package "com.board.repository" {
+  interface UserRepository {
+    + findAll(): List<User>
+    + findById(id: Long): User
+    + save(user: User): User
+  }
+
+  interface RoleRepository {
+    + findAll(): List<Role>
+    + findById(id: Long): Role
+    + save(role: Role): Role
+  }
+
+  interface CategoryRepository {
+    + findAll(): List<Category>
+    + findById(id: Long): Category
+    + save(category: Category): Category
+  }
+
+  interface AnnouncementRepository {
+    + findAll(): List<Announcement>
+    + findById(id: Long): Announcement
+    + save(announcement: Announcement): Announcement
+  }
+}
+
+User -- Role
+Announcement -- User
+Announcement -- Category
+UserService ..> UserRepository
+RoleService ..> RoleRepository
+CategoryService ..> CategoryRepository
+AnnouncementService ..> AnnouncementRepository
+
 @enduml
