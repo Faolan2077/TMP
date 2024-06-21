@@ -1,16 +1,14 @@
 @startuml
-node "User Device" {
-    [Client App]
+node Веб-сервер {
+    database База данных
+    component Веб-приложение
+    interface API
 }
 
-node "Application Server" {
-    [Server]
-}
+node "Клиентский интерфейс" as Клиент
 
-node "Database Server" {
-    [Database]
-}
+Клиент -- Веб-сервер
+Веб-приложение -- API
+API -- База данных
 
-[Client App] --> [Server] : HTTP Requests
-[Server] --> [Database] : SQL Queries
 @enduml
