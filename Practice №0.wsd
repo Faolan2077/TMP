@@ -1,0 +1,3 @@
+@startuml Practice_№1_BISO-02-21_Paromov_Y.A.
+Bob -> Alice : Привет!
+@enduml
