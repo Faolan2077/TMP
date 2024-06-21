@@ -1,15 +1,13 @@
 @startuml
-actor User
-actor AdminSystem
+left to right direction
+skinparam packageStyle rectangle
+actor Пользователь as User
 
-User --> (Register)
-User --> (Unregister)
-User --> (Connect)
-User --> (Disconnect)
-User --> (Send Message)
-User --> (Receive Message)
-
-AdminSystem --> (Register)
-AdminSystem --> (Unregister)
-
+rectangle "Электронная доска объявлений" {
+  usecase "Размещение объявления" as PlaceAd
+  usecase "Удаление объявления" as DeleteAd
+  User --> PlaceAd
+  User --> DeleteAd
+}
 @enduml
+
